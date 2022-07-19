@@ -31,6 +31,12 @@ export class TimeSpan {
         return new Date(this._end);
     }
 
+    /**
+     * Checks, if the timespan includes a specific date
+     * @param date Date, to be checked
+     */
+    public includes = (date: Date) => date.getTime() >= this.start.getTime() && date.getTime() <= this.end.getTime();
+
     public get iterate() {
         return {
             days: (cb: (date: Date) => void) => iterateDays(this.start, this.end, cb)

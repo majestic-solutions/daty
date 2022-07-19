@@ -56,6 +56,44 @@ describe("TimeSpan Tests", () => {
 
     });
 
+    describe("Includes", () => {
+        it('should include a specific date', () => {
+            // => Arrange
+            const sut = new TimeSpan(new Date(2022, 1, 2), new Date(2022, 1, 20));
+            const date = new Date(2022, 1, 10);
+
+            // => Act
+            const result = sut.includes(date);
+
+            // => Assert
+            expect(result).toBeTruthy();
+        });
+
+        it('should not include a specific date - later', () => {
+            // => Arrange
+            const sut = new TimeSpan(new Date(2022, 1, 2), new Date(2022, 1, 20));
+            const date = new Date(2022, 2, 10);
+
+            // => Act
+            const result = sut.includes(date);
+
+            // => Assert
+            expect(result).toBeFalsy();
+        });
+
+        it('should not include a specific date - earlier', () => {
+            // => Arrange
+            const sut = new TimeSpan(new Date(2022, 2, 2), new Date(2022, 1, 20));
+            const date = new Date(2022, 1, 10);
+
+            // => Act
+            const result = sut.includes(date);
+
+            // => Assert
+            expect(result).toBeFalsy();
+        });
+    });
+
     describe("Iterate", () => {
         describe("Days", () => {
             it('should iterate through the days', () => {
